@@ -1,4 +1,4 @@
-const Engineer = require("lib\Employee.js");
+const Engineer = require("lib\Engineer.js");
 
 test("Test to create a github", () => {
     const tryGithub = "comkirk30";
@@ -16,4 +16,4 @@ test("Test role", () => {
     const returnValue = "Engineer";
     const employeeChoice = new Engineer("Courtney", 2, "courtneymkirk@hotmail.com", comkirk30);
     expect(employeeChoice.testRole).toBe(returnValue);
-})
+});

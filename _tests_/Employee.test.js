@@ -26,24 +26,24 @@ test("Email test", () => {
 
 test("Obtain name with getName", () => {
     const testName = "Courtney"
-    const employeeChoice = new Employee(testName);
-    expect(employeeChoice.testName()).toBe(testName);
+    const employeeChoice = new Employee(getName);
+    expect(employeeChoice.getName()).toBe(testName);
 })
 
 test("Testing ID with getID", () => {
     const testID = "2"
-    const employeeChoice = new Employee("Courtney", testID);
-    expect(employeeChoice.testID()).toBe(testID);
+    const employeeChoice = new Employee("Courtney", getID);
+    expect(employeeChoice.getID()).toBe(testID);
 })
 
 test("Testing email with getEmail", () => {
     const testEmail = "courtneymkirk@hotmail.com"
     const employeeChoice = new Employee("Courtney", 2, testEmail);
-    expect(employeeChoice.testEmail()).toBe(testEmail);
+    expect(employeeChoice.getEmail()).toBe(testEmail);
 })
 
 test("Test role", () => {
     const returnValue = "Employee"
     const employeeChoice = new Employee("Courtney", 2, "courtneymkirk@hotmail.com");
     expect(employeeChoice.testRole()).toBe(returnValue);
-})
+});
