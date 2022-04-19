@@ -14,7 +14,7 @@ const askManager = () => {
     console.log(`
     
 ===================================================
-            Create a Team Profile
+            Create Team Profile
 ===================================================
     
     `)
@@ -29,8 +29,9 @@ inquirer.prompt([
                 return true;
             }
             return "Enter manager name"
-        },
-     {
+        }
+    },
+    {
         type: 'input',
         name: 'id',
         message: 'What is manager ID?',
@@ -47,7 +48,7 @@ inquirer.prompt([
     }
 }
 },
-])
+
     {
         type: 'input',
         name: 'officeNumber',
@@ -57,16 +58,16 @@ inquirer.prompt([
         type: 'list',
         name: 'addTeamMember',
         message: 'What kind of new team member are you adding?',
-        choices: ['Engineer', 'Intern', 'Decline to add new member',
+        choices: ['Engineer', 'Intern', 'Decline to add new member'],
     }
 ])
     
-    .then(mgrAnswers) => {
+    .then((mgrAnswers) => {
         const manager = new Manager(mgrAnswers.name, mgrAnswers.id, mgrAnswers.email, mgrAnswers.officeNumber)
         team.push(manager)
         switch(mgrAnswers.addTeamMember) {
             case 'Engineer':
-                askEngineer():
+                askEngineer();
                 break;
             case 'Intern':
                 askIntern();
@@ -77,3 +78,76 @@ inquirer.prompt([
     });
 
 };
+
+    
+const askEngineer = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the engineer name?',
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter the engineer name"
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is engineer ID?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is engineer email?',
+            validate: (value) => {
+                if (emailValidator.validate(value)) {
+                    return true
+                } else {
+                   return 'Enter a valid engineer email'
+        }
+    }
+        },
+        {
+            type: 'input',
+            name: 'gitHub',
+            message: 'What is the engineer GitHub username?',
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Enter the engineer GitHub username"
+             }
+            },
+            {
+            type: 'list',
+            name: 'addTeamMember',
+            message: 'What kind of new team member are you adding?',
+            choices: ['Engineer', 'Intern', 'Decline to add new member'],
+        }
+    ])
+
+    .then((engAnswers) => {
+        const manager = new Manager(engAnswers.name, engAnswers.id, engAnswers.email, engAnswers.officeNumber)
+        team.push(manager)
+        switch(engAnswers.addTeamMember) {
+            case 'Engineer':
+                askEngineer();
+                break;
+            case 'Intern':
+                askIntern();
+                break;
+            default:
+                writeToFile('dist\index.html', createTeam(team))
+        }
+    })
+    
+
+
+
+
+
+
+    
