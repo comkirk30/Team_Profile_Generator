@@ -86,10 +86,10 @@ let makeManagerCard = function (Engineer) {
           </div>
       </div>     
       `;
+};
 
-
-      let makeInternCard = function (Intern) {
-        return `
+let makeInternCard = function (Intern) {
+  return `
         <div class="col-4 mt-4">
         <div class="card">
             <h2 class="card-title">${Intern.name}</h2>
@@ -110,13 +110,10 @@ let makeManagerCard = function (Engineer) {
     </div>
 </div>     
 `;
- };
-
-
+};
 
 function createTeam(team) {
-
-    return`
+  return `
     <!DOCTYPE html>
     <html lang="en">
         <head>
