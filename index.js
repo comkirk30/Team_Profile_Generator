@@ -4,7 +4,7 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const fs = require("fs");
 const emailValidator = require("email-validator");
-const createTeam = require("./");
+//const createTeam = require("./src/createTeam");
 
 team = [];
 
@@ -17,6 +17,17 @@ const askManager = () => {
     
     `);
 
+inquirer
+    .prompt([
+        {
+        type: "input",
+        name: "name",
+        message: "What your name?"
+    ])
+        };
+
+        
+    
   inquirer
     .prompt([
       {
@@ -77,7 +88,7 @@ const askManager = () => {
           askIntern();
           break;
         default:
-          writeToFile("distindex.html", createTeam(team));
+        //   writeToFile("distindex.html", createTeam(team));
       }
     });
 };
@@ -148,7 +159,7 @@ const askEngineer = () => {
           askIntern();
           break;
         default:
-          writeToFile("distindex.html", createTeam(team));
+        //      writeToFile("distindex.html", createTeam(team));
       }
     });
 
@@ -218,7 +229,7 @@ const askEngineer = () => {
             askIntern();
             break;
           default:
-            writeToFile("distindex.html", createTeam(team));
+          //   writeToFile("distindex.html", createTeam(team));
         }
       });
   };
