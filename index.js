@@ -4,7 +4,7 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const fs = require("fs");
 const emailValidator = require("email-validator");
-//const createTeam = require("./src/createTeam");
+const createTeam = require("./src/createTeam");
 
 team = [];
 
@@ -17,23 +17,12 @@ const askManager = () => {
     
     `);
 
-inquirer
-    .prompt([
-        {
-        type: "input",
-        name: "name",
-        message: "What your name?"
-    ])
-        };
-
-        
-    
   inquirer
     .prompt([
       {
         type: "input",
         name: "name",
-        message: "What is manager name?",
+        message: "What the name of the manager?",
         validate: (answer) => {
           if (answer !== "") {
             return true;
@@ -44,12 +33,12 @@ inquirer
       {
         type: "input",
         name: "id",
-        message: "What is manager ID?",
+        message: "What is the manager ID?",
       },
       {
         type: "input",
         name: "email",
-        message: "What is manager email?",
+        message: "What is the manager email?",
         validate: (value) => {
           if (emailValidator.validate(value)) {
             return true;
@@ -73,12 +62,14 @@ inquirer
     ])
 
     .then((mgrAnswers) => {
+      console.log("abc", mgrAnswers);
       const manager = new Manager(
         mgrAnswers.name,
         mgrAnswers.id,
         mgrAnswers.email,
         mgrAnswers.officeNumber
       );
+
       team.push(manager);
       switch (mgrAnswers.addTeamMember) {
         case "Engineer":
@@ -88,121 +79,51 @@ inquirer
           askIntern();
           break;
         default:
-        //   writeToFile("distindex.html", createTeam(team));
-      }
-    });
-};
-
-const askEngineer = () => {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "What is the engineer name?",
-        validate: (answer) => {
-          if (answer !== "") {
-            return true;
-          }
-          return "Enter the engineer name";
-        },
-      },
-      {
-        type: "input",
-        name: "id",
-        message: "What is engineer ID?",
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "What is engineer email?",
-        validate: (value) => {
-          if (emailValidator.validate(value)) {
-            return true;
-          } else {
-            return "Enter a valid engineer email";
-          }
-        },
-      },
-      {
-        type: "input",
-        name: "gitHub",
-        message: "What is the engineer GitHub username?",
-        validate: (answer) => {
-          if (answer !== "") {
-            return true;
-          }
-          return "Enter the engineer GitHub username";
-        },
-      },
-      {
-        type: "list",
-        name: "addTeamMember",
-        message: "What kind of new team member are you adding?",
-        choices: ["Engineer", "Intern", "Decline to add new member"],
-      },
-    ])
-
-    .then((engAnswers) => {
-      const engineer = new Engineer(
-        engAnswers.name,
-        engAnswers.id,
-        engAnswers.email,
-        engAnswers.github
-      );
-      team.push(engineer);
-      switch (engAnswers.addTeamMember) {
-        case "Engineer":
-          askEngineer();
-          break;
-        case "Intern":
-          askIntern();
-          break;
-        default:
-        //      writeToFile("distindex.html", createTeam(team));
+          writeToFile("distindex.html", createTeam(team));
       }
     });
 
-  const askIntern = () => {
+  const askEngineer = () => {
     inquirer
       .prompt([
         {
           type: "input",
           name: "name",
-          message: "What is the intern name?",
+          message: "What is the engineer name?",
           validate: (answer) => {
             if (answer !== "") {
               return true;
             }
-            return "Enter the intern name";
+            return "Enter the engineer name";
           },
         },
         {
           type: "input",
           name: "id",
-          message: "What is intern ID?",
+          message: "What is the engineer ID?",
         },
         {
           type: "input",
           name: "email",
-          message: "What is intern email?",
+          message: "What is the engineer email?",
           validate: (value) => {
             if (emailValidator.validate(value)) {
               return true;
             } else {
-              return "Enter a valid intern email";
+              return "Enter a valid engineer email";
             }
           },
         },
+
         {
           type: "input",
-          name: "school",
-          message: "What is the intern school?",
+          name: "gitHub",
+          message: "What is the engineer GitHub username?",
           validate: (answer) => {
             if (answer !== "") {
               return true;
             }
-            return "Enter the intern school";
+            return "Enter the engineer GitHub username";
           },
         },
         {
@@ -213,15 +134,15 @@ const askEngineer = () => {
         },
       ])
 
-      .then((intAnswers) => {
-        const intern = new Intern(
-          intAnswers.name,
-          intAnswers.id,
-          intAnswers.email,
-          intAnswers.school
+      .then((engAnswers) => {
+        const engineer = new Engineer(
+          engAnswers.name,
+          engAnswers.id,
+          engAnswers.email,
+          engAnswers.github
         );
-        team.push(intern);
-        switch (intAnswers.addTeamMember) {
+        team.push(engineer);
+        switch (engAnswers.addTeamMember) {
           case "Engineer":
             askEngineer();
             break;
@@ -229,17 +150,87 @@ const askEngineer = () => {
             askIntern();
             break;
           default:
-          //   writeToFile("distindex.html", createTeam(team));
+            writeToFile("distindex.html", createTeam(team));
         }
       });
+
+    const askIntern = () => {
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "name",
+            message: "What is the intern name?",
+            validate: (answer) => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Enter the intern name";
+            },
+          },
+          {
+            type: "input",
+            name: "id",
+            message: "What is intern ID?",
+          },
+          {
+            type: "input",
+            name: "email",
+            message: "What is intern email?",
+            validate: (value) => {
+              if (emailValidator.validate(value)) {
+                return true;
+              } else {
+                return "Enter a valid intern email";
+              }
+            },
+          },
+          {
+            type: "input",
+            name: "school",
+            message: "What is the intern school?",
+            validate: (answer) => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Enter the intern school";
+            },
+          },
+          {
+            type: "list",
+            name: "addTeamMember",
+            message: "What kind of new team member are you adding?",
+            choices: ["Engineer", "Intern", "Decline to add new member"],
+          },
+        ])
+
+        .then((intAnswers) => {
+          const intern = new Intern(
+            intAnswers.name,
+            intAnswers.id,
+            intAnswers.email,
+            intAnswers.school
+          );
+          team.push(intern);
+          switch (intAnswers.addTeamMember) {
+            case "Engineer":
+              askEngineer();
+              break;
+            case "Intern":
+              askIntern();
+              break;
+            default:
+              writeToFile("distindex.html", createTeam(team));
+          }
+        });
+    };
   };
-
-  askManager();
-
-  function writeToFile(filename, data) {
-    fs.writeFile(filename, data, (err) => {
-      if (err) throw err;
-      console.log("file successfully saved");
-    });
-  }
 };
+askManager();
+
+function writeToFile(filename, data) {
+  fs.writeFile(filename, data, (err) => {
+    if (err) throw err;
+    console.log("file successfully saved");
+  });
+}

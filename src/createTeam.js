@@ -64,7 +64,7 @@ let makeEngineerCard = function (Engineer) {
     `;
 };
 
-let makeManagerCard = function (Engineer) {
+let makeManagerCard = function (Manager) {
   return `
               <div class="col-4 mt-4">
               <div class="card">
@@ -80,7 +80,9 @@ let makeManagerCard = function (Engineer) {
                       <li class="list-group-item">Email: <a href="mailto:${
                         Manager.email
                       }">${Manager.email}</a></li>
-                      <li class="list-group-item">Office Number: ${Manager.officeNumber()}</li>
+                      <li class="list-group-item">Office Number: ${
+                        Manager.email
+                      }</li>
                   </ul>
               </div>
           </div>
