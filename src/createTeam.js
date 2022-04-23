@@ -12,8 +12,9 @@ function generateCards(team) {
           teamArray.name,
           teamArray.id,
           teamArray.email,
-          teamArray.github
+          teamArray.gitHub
         );
+
         cards.push(makeEngineerCard(engineer));
         break;
       case "Manager":
@@ -32,7 +33,7 @@ function generateCards(team) {
           teamArray.email,
           teamArray.school
         );
-        cards.push(makeInternCard(manager));
+        cards.push(makeInternCard(intern));
         break;
     }
   }
@@ -42,6 +43,7 @@ function generateCards(team) {
 
 let makeEngineerCard = function (Engineer) {
   return `
+ 
             <div class="col-4 mt-4">
             <div class="card">
                 <h2 class="card-title">${Engineer.name}</h2>
@@ -56,7 +58,9 @@ let makeEngineerCard = function (Engineer) {
                     <li class="list-group-item">Email: <a href="mailto:${
                       Engineer.email
                     }">${Engineer.email}</a></li>
-                    <li class="list-group-item">GitHub: <a href="https://github.com/${Engineer.getGithub()}">${Engineer.getGithub()}</a></li>
+                    <li class="list-group-item">GitHub: <a href="https://github.com/${
+                      Engineer.gitHub
+                    }">${Engineer.gitHub}</a></li>
                 </ul>
             </div>
         </div>
@@ -81,7 +85,7 @@ let makeManagerCard = function (Manager) {
                         Manager.email
                       }">${Manager.email}</a></li>
                       <li class="list-group-item">Office Number: ${
-                        Manager.email
+                        Manager.officeNumber
                       }</li>
                   </ul>
               </div>
@@ -106,7 +110,7 @@ let makeInternCard = function (Intern) {
                 <li class="list-group-item">Email: <a href="mailto:${
                   Intern.email
                 }">${Intern.email}</a></li>
-                <li class="list-group-item">Office Number: ${Manager.getSchool()}</li>
+                <li class="list-group-item">Office Number: ${Intern.school}</li>
             </ul>
         </div>
     </div>
